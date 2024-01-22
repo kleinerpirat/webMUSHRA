@@ -33,8 +33,12 @@ body {
   background-repeat: repeat-x;
   background-position: 0 5em; 
   background-color: #EEE;
-    
-} 
+  font-size: 20px;
+}
+
+.ui-mobile label {
+  font-size: 20px !important;
+}
 
 body.ui-mobile-viewport, div.ui-mobile-viewport {
 	overflow-x: scroll;
@@ -62,7 +66,7 @@ body.ui-mobile-viewport, div.ui-mobile-viewport {
   background: #111;
   color: white;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.6rem;
   text-shadow: 0 -1px 1px black;
   margin: 0 auto;
   padding: .7em 0em;
@@ -131,6 +135,10 @@ td.stopButton {
 
 #mainUp {
   width : 100%;
+}
+
+.ui-controlgroup-vertical {
+  display: inline-block;
 }
 
 .ui-tolito-progressbar-outer-a
