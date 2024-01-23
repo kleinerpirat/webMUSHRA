@@ -2,6 +2,7 @@ testname: Voice Conversion Hörversuch
 testId: default_example
 bufferSize: 2048
 stopOnErrors: true
+showButtonPreviousPage: true
 language: de
 remoteService: service/write.php
 
@@ -53,10 +54,32 @@ pages:
       content: Wählen Sie
       showWaveform: true
       enableLooping: false
-      reference: configs/resources/audio/mono_c1.wav
+      reference: configs/resources/audio/kennedy_moon.wav
       stimuli:
         C1: configs/resources/audio/kennedy_moon.wav
-        C2: configs/resources/audio/trump_lowest.wav
+    - type: bs1116
+      id: bs1116_nowav
+      name: BS 11.16 test
+      content: This is a BS1116 page.
+      showWaveform: true
+      enableLooping: true 
+      reference: configs/resources/audio/biden_lowest.wav
+      createAnchor35: false
+      createAnchor70: false
+      stimuli:
+        C1: configs/resources/audio/female_lowest.wav
+    - type: mushra
+      id: mushra
+      name: MUSHRA 
+      content: This is a MUSHRA page with enabled looping and waveform but without anchors.
+      showWaveform: true
+      enableLooping: true 
+      reference: configs/resources/audio/kennedy_moon.wav
+      createAnchor35: false
+      createAnchor70: false
+      stimuli:
+        C1: configs/resources/audio/kennedy_moon.wav
+        C2: configs/resources/audio/kennedy_moon.wav
     - type: finish
       name: Fast fertig!
       content: Bitte füllen Sie das folgende Formular aus, um das Experiment abzuschließen.
