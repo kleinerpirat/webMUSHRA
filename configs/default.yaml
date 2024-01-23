@@ -1,77 +1,79 @@
-testname: webMUSHRA Example
+testname: Voice Conversion Hörversuch
 testId: default_example
 bufferSize: 2048
 stopOnErrors: true
-showButtonPreviousPage: true
+language: de
 remoteService: service/write.php
 
 
 pages:
-    - type: generic
-      id: first_page
-      name: Welcome
-      content: Welcome to webMUSHRA!       
-    - type: mushra
-      id: trial1
-      name: MUSHRA
-      content: This training shows how to use our user interface. Please perform the underlined instructions to proceed with the training session. Reminder: In a MUSHRA listening test you are asked to rate the Basic Audio Quality (BAQ) of each condition.<br/>Basic Audio Quality is a single and global attribute that is used to judge any and all detected differences between the reference and the condition.
-      showWaveform: true
-      enableLooping: true 
-      reference: configs/resources/audio/mono_ref.wav
-      createAnchor35: true
-      createAnchor70: true
+    - type: consent
+      id: consent_page
+      name: Einverständniserklärung
+      mustConsent: true
+      content: <p>Sie sind im Begriff, an einem wissenschaftlichen Hörversuch teilzunehmen.<br>Ihre Antworten werden für die statistische Auswertung anonymisiert gespeichert.</p><p>Sind Sie damit einverstanden?</p>
+    - type: volume
+      id: volume_page
+      name: Einleitung
+      content: <p>Willkommen zu unserem Online-Hörversuch!</p><p>Auf den folgenden Seiten werden Ihnen einige Sprachaufnahmen präsentiert. Ihre Aufgabe ist es, die Sprachaufnahmen anhand der jeweils angegebenen Qualitätskriterien zu bewerten.</p><hr><p>Nutzen Sie diese Beispielaufnahme, um die Lautstärke auf ein angenehmes Niveau anzupassen.<br>Bitte ändern Sie die Lautstärke Ihres Endgerätes für den weiteren Verlauf des Hörversuchs nicht mehr.</p>
+      stimulus: configs/resources/audio/kennedy_moon.wav
+      defaultVolume: 0.5
+    - type: likert_multi_stimulus
+      id: lms2
+      name: Likert
+      content: <p>Spielen Sie die Aufnahme ab und bewerten Sie die Qualität von 1-4.<br><small>(1 = am schlechtesten, 4 = am besten)</small></p>
+      mustRate: true
       stimuli:
-          C1: configs/resources/audio/mono_c1.wav
-          C2: configs/resources/audio/mono_c2.wav
-          C3: configs/resources/audio/mono_c3.wav
-    - 
-          - random
-          - type: mushra
-            id: trial_random_1
-            name: MUSHRA - Random 2
-            content: Due to randomization, this page will be either the second MUSHRA page or the third MUSHRA page.
-            enableLooping: true 
-            reference: configs/resources/audio/mono_ref.wav
-            createAnchor35: false
-            createAnchor70: false
-            stimuli:
-                C1: configs/resources/audio/mono_c1.wav
-                C2: configs/resources/audio/mono_c2.wav
-                C3: configs/resources/audio/mono_c3.wav          
-          - type: mushra
-            id: trial_random_2
-            name: MUSHRA - Random 1
-            content: Due to randomization, this page will be either the second MUSHRA page or the third MUSHRA page.
-            enableLooping: true 
-            reference: configs/resources/audio/mono_ref.wav
-            createAnchor35: false
-            createAnchor70: false
-            stimuli:
-                C1: configs/resources/audio/mono_c1.wav
-                C2: configs/resources/audio/mono_c2.wav
-                C3: configs/resources/audio/mono_c3.wav          
+          C1: configs/resources/audio/trump_lowest.wav
+      response:
+        - value: not at all
+          label: 1
+          img: configs/resources/images/star_off.png
+          imgSelected: configs/resources/images/star_on.png
+          imgHigherResponseSelected: configs/resources/images/star_on.png
+        - value: not a lot
+          label: 2
+          img: configs/resources/images/star_off.png
+          imgSelected: configs/resources/images/star_on.png
+          imgHigherResponseSelected: configs/resources/images/star_on.png
+        - value: a bit
+          label: 3
+          img: configs/resources/images/star_off.png
+          imgSelected: configs/resources/images/star_on.png
+          imgHigherResponseSelected: configs/resources/images/star_on.png
+        - value: much
+          label: 4
+          img: configs/resources/images/star_off.png
+          imgSelected: configs/resources/images/star_on.png
+          imgHigherResponseSelected: configs/resources/images/star_on.png
+    - type: paired_comparison
+      id: AB_noloop
+      name: AB-Test
+      unforced: 
+      content: Wählen Sie
+      showWaveform: true
+      enableLooping: false
+      reference: configs/resources/audio/mono_c1.wav
+      stimuli:
+        C1: configs/resources/audio/kennedy_moon.wav
+        C2: configs/resources/audio/trump_lowest.wav
     - type: finish
-      name: Thank you
-      content: Thank you for attending!
-      showResults: true
+      name: Fast fertig!
+      content: Bitte füllen Sie das folgende Formular aus, um das Experiment abzuschließen.
+      showResults: false
       writeResults: true
       questionnaire:
-          - type: text
-            label: eMail
-            name: email
           - type: number
-            label: Age
+            label: Alter
             name: age
             min: 0
             max: 100
-            default: 30
+            default: 20
           - type: likert
             name: gender
-            label: Gender
+            label: Geschlecht
             response:
              - value: female
-               label: Female
+               label: Frau
              - value: male
-               label: Male
-             - value: other
-               label: Other
+               label: Mann
